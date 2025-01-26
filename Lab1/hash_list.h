@@ -44,6 +44,9 @@ public:
      *  The value to insert into the list
      */
     void insert(int key, float value);
+    {
+        // something
+    }
 
     /**
      * @brief Return an optional containing the value associated with the specified key. If the key
