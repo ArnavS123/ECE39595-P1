@@ -43,9 +43,25 @@ public:
      * @param value
      *  The value to insert into the list
      */
-    void insert(int key, float value);
+    void insert(int key, float value)
     {
-        // something
+        node* curr = head;
+
+        while (curr != nullptr)
+        {
+            if (curr->key == key)
+            {
+                curr->value = value;
+                return;
+            }
+            curr = curr->next;
+        }
+
+        node* new_node = new node{key, value, nullptr}; // next is set to nullptr (end of list)
+        head = new_node;
+
+        size++;
+        return;
     }
 
     /**
@@ -58,7 +74,10 @@ public:
      *  If the key isn't in the list returns an empty optional
      *  If the key is in the list returns the corresponding value
      */
-    std::optional<float> get_value(int key) const;
+    std::optional<float> get_value(int key) const
+    {
+        
+    }
 
     /**
      * @brief Remove the node containing the specified key from the list and return true.
@@ -70,7 +89,33 @@ public:
      *  True if the key was removed from the list
      *  False if the key wasn't in the list
      */
-    bool remove(int key);
+    bool remove(int key)
+    {
+        node* curr = head;
+        node* prev = nullptr;
+
+        while (curr != nullptr)
+        {
+            if (curr->key == key)
+            {
+                if (curr == head)
+                {
+                    head = curr->next;
+                }
+                else
+                {
+                    prev->next = curr->next;
+                }
+                delete(curr);
+                size--;
+                return(true);
+            }
+            prev = curr;
+            curr = curr->next;
+        }
+
+        return(false);
+    }
 
     /**
      * @brief Return the number of nodes in the list. 
