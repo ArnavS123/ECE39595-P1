@@ -1,6 +1,6 @@
 #include "hash_list.h"
 
-hash_list::hash_list() : size(0), head(nullptr) {}//hash_list::hash_list() {}
+hash_list::hash_list() : size(0), head(nullptr) {}
 
 /**-----------------------------------------------------------------------------------
  * START Part 1
