@@ -1,6 +1,6 @@
 #include "hash_list.h"
 
-hash_list::hash_list() {}
+hash_list::hash_list() : size(0), head(nullptr) {}//hash_list::hash_list() {}
 
 /**-----------------------------------------------------------------------------------
  * START Part 1
@@ -20,7 +20,7 @@ void hash_list::insert(int key, float value)
         curr = curr->next;
     }
 
-    node* new_node = new node{key, value, nullptr}; // next is set to nullptr (end of list)
+    node* new_node = new node{key, value, head}; // next is set to head
     head = new_node;
 
     size++;
