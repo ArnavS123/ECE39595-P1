@@ -76,7 +76,18 @@ public:
      */
     std::optional<float> get_value(int key) const
     {
-        
+        node* curr = head;
+
+        while (curr != nullptr)
+        {
+            if (curr->key == key)
+            {
+                return(curr->value);
+            }
+            curr = curr->next;
+        }
+
+        return(std::nullopt);
     }
 
     /**
@@ -124,14 +135,28 @@ public:
      * @return
      *  the number of nodes in the list
      */
-    size_t get_size() const;
+    size_t get_size() const
+    {
+        return(size);
+    }
 
     /**
      * @brief Free all memory associated with the nodes. 
      * This must not free the nodes recursively
      */
-    ~hash_list();
+    ~hash_list()
+    {
+        node* curr = head;
 
+        while (curr != nullptr)
+        {
+            node* next_curr = curr->next;
+            delete(curr);
+            curr = next_curr;
+        }
+
+        return;
+    }
 
     /**-----------------------------------------------------------------------------------
      * END Part 1
@@ -141,6 +166,7 @@ public:
     /**-----------------------------------------------------------------------------------
      * START Part 2
      *------------------------------------------------------------------------------------*/
+    
     /**
      * @brief The copy constructor
      * 
