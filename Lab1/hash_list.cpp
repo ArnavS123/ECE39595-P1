@@ -99,20 +99,47 @@ hash_list::~hash_list()
  * START Part 2
  *------------------------------------------------------------------------------------*/
 
-hash_list::hash_list(const hash_list &other) {}
+hash_list::hash_list(const hash_list &other) : size(0), head(nullptr), iter_ptr(nullptr)
+{
+    if (other.head == nullptr)
+    {
+        return;
+    }
+
+    node* curr_original = other.head;
+    node* prev_new = nullptr;
+
+    while (curr_original != nullptr)
+    {
+        node* new_node = new node{curr_original->key, curr_original->value, nullptr};
+
+        if (head == nullptr)
+        {
+            head = new_node;
+        }
+        else
+        {
+            prev_new->next = new_node;
+        }
+
+        prev_new = new_node;
+        curr_original = curr_original->next;
+    }
+
+    size = other.size;
+    return;
+}
 
 hash_list &hash_list::operator=(const hash_list &other) { return *this; }
 
 void hash_list::reset_iter() {}
 
-
 void hash_list::increment_iter() {}
-
 
 std::optional<std::pair<const int *, float *>> hash_list::get_iter_value() { return std::nullopt; }
 
-
 bool hash_list::iter_at_end() { return false; }
+
 /**-----------------------------------------------------------------------------------
  * END Part 2
  *------------------------------------------------------------------------------------*/
